@@ -11,6 +11,9 @@ public:
 private:
 	Contact *contact;
 	int	index;
+public:
+	void add();
+	void search();
 };
 
 #endif

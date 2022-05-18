@@ -15,7 +15,7 @@
 PROJECT = phonebook
 NAME = ./phonebook
 
-FILES = main.cpp contact.cpp
+FILES = main.cpp contact.cpp phonebook.cpp
 HEADERS = contact.hpp
 OBJ = ${FILES:.cpp=.o}
 

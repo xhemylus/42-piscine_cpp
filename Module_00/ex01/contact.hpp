@@ -8,6 +8,9 @@ class Contact
 public:
 	Contact();
 	~Contact();
+	void	create(void);
+	void	print(int index);
+	void	focus(void);
 private:
 	std::string firstname;
 	std::string lastname;
@@ -15,4 +18,6 @@ private:
 	std::string	phonenumber;
 	std::string	darkest_secret;
 };
+
+
 #endif
