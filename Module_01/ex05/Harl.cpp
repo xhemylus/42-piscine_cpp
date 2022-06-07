@@ -9,25 +9,25 @@ Harl::Harl()
 void Harl::complain(std::string level)
 {
     
-    enum SC { debug, info, warning, error};
-    
-    void (Harl::complain[])
+    void (Harl::*complain[])(void) = 
     {
-        Harl::debug,
-        Harl::info,
-        Harl::warning,
-        Harl::error
+        &Harl::debug,
+        &Harl::info,
+        &Harl::warning,
+        &Harl::error
+    };
+
+    std::string levels[] =
+    {
+        "debug",
+        "info",
+        "warning",
+        "error",
     }
 
     for (int i; i < 4 ; i++)
-    {
-        SC switchcase
-        if (level == switchcase[i])
-            ()
-
-        // Link the index of SC to the function in complain[]. Idk how to do it but I must sleep so... tomorrow.
-
-    }
+        if (level == levels[i])
+            this->*complain[i]();
 };
 
 void Harl::debug(void)
