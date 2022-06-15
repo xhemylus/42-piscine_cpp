@@ -6,10 +6,15 @@ Harl::Harl()
 
 }
 
+Harl::~Harl()
+{
+
+}
+
 void Harl::complain(std::string level)
 {
     
-    void (Harl::*complain[])(void) = 
+    void (Harl::*funPTR[])(void) = 
     {
         &Harl::debug,
         &Harl::info,
@@ -23,11 +28,11 @@ void Harl::complain(std::string level)
         "info",
         "warning",
         "error",
-    }
+    };
 
     for (int i; i < 4 ; i++)
         if (level == levels[i])
-            this->*complain[i]();
+            (this->*funPTR[i]());
 };
 
 void Harl::debug(void)
