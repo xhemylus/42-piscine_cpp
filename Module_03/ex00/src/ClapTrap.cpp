@@ -1,5 +1,12 @@
 #include "ClapTrap.hpp"
 
+
+ClapTrap::ClapTrap()
+	: _name("ClapTrap"), _hitpoint(10), _energyPoints(10), _attackDamage(0)
+{
+	std::cout << _name << " created." << std::endl;
+};
+
 ClapTrap::ClapTrap(std::string name)
 	: _name(name), _hitpoint(10), _energyPoints(10), _attackDamage(0)
 {
@@ -33,13 +40,16 @@ int ClapTrap::check(void)
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-	if (!check())
+	if (_hitpoint < 1)
 	{
-		std::cout << _name << " took " << amount << " damage!" << std::endl;;
-		_hitpoint -= amount;
-		_energyPoints -= 1;
-		std::cout << _name << " has now " << _hitpoint << " hp!" << std::endl;
+		std::cout << _name << " is dead!" << std::endl;
+		return;
 	}
+		std::cout << _name << " took " << amount << " damage!" << std::endl;;
+		if (amount > _hitpoint)
+			amount = _hitpoint;
+		_hitpoint -= amount;
+		std::cout << _name << " has now " << _hitpoint << " hp!" << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
