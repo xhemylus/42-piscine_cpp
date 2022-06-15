@@ -5,7 +5,7 @@ ScavTrap::ScavTrap() : ClapTrap()
 	this->_hitpoint = 100;
 	this->_energyPoints = 50;
 	this->_attackDamage = 20;
-	std::cout << "ScavTrap " << _name << " created." << std::endl;
+	std::cout << "ScavTrap constructor called." << std::endl;
 }
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
@@ -13,7 +13,7 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 	this->_hitpoint = 100;
 	this->_energyPoints = 50;
 	this->_attackDamage = 20;
-	std::cout << "ScavTrap " << _name << " created." << std::endl;
+	std::cout << "ScavTrap constructor created." << std::endl;
 };
 
 void ScavTrap::guardGate()
@@ -32,5 +32,5 @@ void ScavTrap::guardGate()
 
 ScavTrap::~ScavTrap()
 {
-	std::cout << "ScavTrap " << _name << " destroyed." << std::endl;
+	std::cout << "ScavTrap destructor called." << std::endl;
 }
