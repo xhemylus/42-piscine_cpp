@@ -44,7 +44,7 @@ ${OBJ_DIR}:
 
 clean :
 	@rm -rf ${OBJ_DIR}
-	@echo "\033[36m[${PROJECT}]\033[93m[CLEAN] \033[0m${OBJ}"
+	@echo "\033[36m[${PROJECT}]\033[93m[CLEAN] \033[0m${OBJ_DIR} folder"
 
 fclean : clean
 	@rm -rf ${NAME}

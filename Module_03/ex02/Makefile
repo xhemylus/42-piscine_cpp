@@ -12,10 +12,10 @@
 
 #***** VARIABLES *****#
 
-PROJECT = ClapTrap
-NAME = ./claptrap
+PROJECT = ScavTrap
+NAME = ./scavtrap
 
-FILES = main.cpp ClapTrap.cpp
+FILES = main.cpp ClapTrap.cpp ScavTrap.cpp
 OBJ = ${addprefix ${OBJ_DIR}/,${FILES:.cpp=.o}}
 
 SRC_DIR = src
@@ -34,8 +34,8 @@ ${OBJ_DIR}/%.o : ${SRC_DIR}/%.cpp ${HEADER}
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "\033[95m[${PROJECT}]\033[92m[BUILD]\033[97m $@."
 
-${NAME}: ${OBJ_DIR} ${OBJ}
-	@$(CC) $(OBJ) -o $(NAME)
+$(NAME): ${OBJ}
+	@${CC} ${OBJ} -o ${NAME}
 	@echo "\033[36m[${PROJECT}]\033[92m[BUILD] \033[0m${NAME}"
 
 ${OBJ_DIR}:
@@ -52,4 +52,4 @@ fclean : clean
 
 re: fclean all
 
-.PHONY : all clean fclean re
+re : all clean fclean re
