@@ -6,18 +6,18 @@
 #    By: abollen <abollen@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/18 17:38:23 by abollen           #+#    #+#              #
-#    Updated: 2022/06/07 14:46:19 by abollen          ###   ########.fr        #
+#    Updated: 2022/05/17 14:51:12 by abollen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #***** VARIABLES *****#
 
-PROJECT = ClapTrap
-NAME = ./claptrap
+PROJECT = sed_is_for_losers
+NAME = ./sed_is_for_losers
 
-FILES = main.cpp ClapTrap.cpp
+FILES = main.cpp sed.cpp
 OBJ = ${FILES:.cpp=.o}
-HEADER = ClapTrap.hpp
+HEADER = sed.hpp
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -Iincludes -std=c++98

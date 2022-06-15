@@ -16,28 +16,39 @@ void ClapTrap::attack(const std::string &target)
 	std::cout << _name << " attacks " << target << ", causing " << _attackDamage << " points of damage." << std::endl;;
 }
 
+int ClapTrap::check(void)
+{
+	if (_hitpoint < 1)
+	{
+		std::cout << _name << " is dead!" << std::endl;
+		return (1);
+	}
+	if (_energyPoints < 1)
+	{
+		std::cout << "Not enough energy!" << std::endl;
+		return (1);
+	}
+	return (0);
+}
+
 void ClapTrap::takeDamage(unsigned int amount)
 {
-	if (_energyPoints != 0)
+	if (!check())
 	{
 		std::cout << _name << " took " << amount << " damage!" << std::endl;;
 		_hitpoint -= amount;
 		_energyPoints -= 1;
 		std::cout << _name << " has now " << _hitpoint << " hp!" << std::endl;
 	}
-	else
-		std::cout << "Not enough energy!" << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-	if (_energyPoints != 0)
+	if (!check())
 	{
 		std::cout << _name << " repairs " << amount << " hp!" << std::endl;;
 		_hitpoint += amount;
 		_energyPoints -= 1;
 		std::cout << _name << " has now " << _hitpoint << " hp!" << std::endl;;
 	}
-	else
-		std::cout << "Not enough energy!" << std::endl;
 }
