@@ -4,18 +4,18 @@
 ClapTrap::ClapTrap()
 	: _name("ClapTrap"), _hitpoint(10), _energyPoints(10), _attackDamage(0)
 {
-	std::cout << _name << " created." << std::endl;
+	std::cout << "ClapTrap construcor created." << std::endl;
 };
 
 ClapTrap::ClapTrap(std::string name)
 	: _name(name), _hitpoint(10), _energyPoints(10), _attackDamage(0)
 {
-	std::cout << _name << " created." << std::endl;
+	std::cout << "ClapTrap construcor created." << std::endl;
 };
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << _name << " destroyed." << std::endl;
+	std::cout << "ClapTrap destructor called." << std::endl;
 };
 
 void ClapTrap::attack(const std::string &target)
