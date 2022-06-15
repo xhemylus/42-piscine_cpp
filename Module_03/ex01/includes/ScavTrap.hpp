@@ -12,7 +12,7 @@ public:
 
 	void guardGate();
 private:
-	int isGuard;	
+	int isGuard;
 };
 
 #endif

@@ -13,6 +13,8 @@ int main(void)
     jeff.attack("Michel");
     jeff.takeDamage(3);
     jeff.beRepaired(2);
+    jeff.guardGate();
+    jeff.guardGate();
 
 
 
