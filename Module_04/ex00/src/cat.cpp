@@ -1,6 +1,6 @@
 #include "cat.hpp"
 
-Cat::Cat()
+Cat::Cat() : Animal()
 {
 	this->_type = "Cat";
 	std::cout << "Cat constructor called." << std::endl;
