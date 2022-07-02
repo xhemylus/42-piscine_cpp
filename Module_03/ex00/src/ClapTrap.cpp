@@ -7,10 +7,16 @@ ClapTrap::ClapTrap()
 	std::cout << "ClapTrap construcor created." << std::endl;
 };
 
+ClapTrap::ClapTrap(const ClapTrap &src)
+{
+		std::cout << "ClapTrap constructor called." << std::endl;
+		*this = src;
+};
+
 ClapTrap::ClapTrap(std::string name)
 	: _name(name), _hitpoint(10), _energyPoints(10), _attackDamage(0)
 {
-	std::cout << "ClapTrap construcor created." << std::endl;
+	std::cout << "ClapTrap constructor created." << std::endl;
 };
 
 ClapTrap::~ClapTrap()
@@ -61,4 +67,16 @@ void ClapTrap::beRepaired(unsigned int amount)
 		_energyPoints -= 1;
 		std::cout << _name << " has now " << _hitpoint << " hp!" << std::endl;;
 	}
+}
+
+ClapTrap & ClapTrap::operator=(const ClapTrap & src)
+{
+	if (this != &src)
+	{
+		this->_name = src._name;
+		this->_hitpoint = src._hitpoint;
+		this->_energyPoints = src._energyPoints;
+		this->_attackDamage = src._attackDamage;
+	}
+	return (*this);
 }
