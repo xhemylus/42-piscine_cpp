@@ -12,10 +12,10 @@
 
 #***** VARIABLES *****#
 
-PROJECT = ScavTrap
-NAME = ./scavtrap
+PROJECT = FragTrap
+NAME = ./fragtrap
 
-FILES = main.cpp ClapTrap.cpp ScavTrap.cpp
+FILES = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
 OBJ = ${addprefix ${OBJ_DIR}/,${FILES:.cpp=.o}}
 
 SRC_DIR = src
