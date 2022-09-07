@@ -2,37 +2,44 @@
 
 int main()
 {
-	const Animal* Meta = new Animal();
-	std::cout << "Type : " << Meta->getType() << " " << std::endl;
-	Meta->makeSound();
-	delete Meta;
+	const Animal *meta[10];
 
-	std::cout << "--------------------" << std::endl;
+	std::cout << "BUILDING" << std::endl;
+	for (int i = 0; i < 10; i++)
+	{
+		if (i % 2)
+			meta[i] = new Cat();
+		else
+			meta[i] = new Dog();
+	}
 
-	const Animal* Doggo = new Dog();
-	std::cout << "Type : " << Doggo->getType() << " " << std::endl;
-	Doggo->makeSound();
-	delete Doggo;
+	std::cout << "TESTING" << std::endl;
+	for (int i = 0; i < 10; i++)
+	{
+		std::cout << std::endl;
+		std::cout << "Animal Type : " << meta[i]->getType() << std::endl;
+		meta[i]->makeSound();
+		std::cout << std::endl;
+	}
 
-	std::cout << "--------------------" << std::endl;
+	for (int i = 0; i < 10; i++)
+		delete(meta[i]);
 
-	const Animal* Catto = new Cat();
-	std::cout << "Type : " << Catto->getType() << " " << std::endl;
-	Catto->makeSound();
-	delete Catto;
+	std::cout << "Deep Copy" << std::endl;
 
-	std::cout << "--------------------" << std::endl;
+	Dog *a = new Dog();
+	a->setIdea(0, "Bonjour je suis un Doggo");
+	a->setIdea(101, "TEST");
 
-	const WrongAnimal* W_Meta = new WrongAnimal();
-	std::cout << "Type : " << W_Meta->getType() << " " << std::endl;
-	W_Meta->makeSound();
-	delete W_Meta;
+	Dog *b = new Dog(*a);
 
-	std::cout << "--------------------" << std::endl;
+	std::cout << "TESTING" << std::endl;
 
-	const WrongAnimal* W_Catto = new WrongCat();
-	std::cout << "Type : " << W_Catto->getType() << " " << std::endl;
-	W_Catto->makeSound();
-	delete W_Catto;
+	a->getIdeas();
+	std::cout << std::endl;
 
+	b->getIdeas();
+	std::cout << std::endl;
+	delete(a);
+	delete(b);
 }
