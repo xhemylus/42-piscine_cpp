@@ -4,7 +4,7 @@
 
 Contact::Contact()
 {
-
+	isCreated = 0;
 }
 
 void	Contact::print(int index)
@@ -45,12 +45,17 @@ void	Contact::print(int index)
 
 void Contact::focus(void)
 {
-	std::cout << "=== CONTACT INFO ===" << std::endl;
-	std::cout << "firstname: " << firstname << std::endl;
-	std::cout << "lastname: " << lastname << std::endl;
-	std::cout << "nickname: " << nickname << std::endl;
-	std::cout << "phone number: " << phonenumber << std::endl;
-	std::cout << "darkest secret: " << darkest_secret << std::endl;
+	if (isCreated)
+	{
+		std::cout << "=== CONTACT INFO ===" << std::endl;
+		std::cout << "firstname: " << firstname << std::endl;
+		std::cout << "lastname: " << lastname << std::endl;
+		std::cout << "nickname: " << nickname << std::endl;
+		std::cout << "phone number: " << phonenumber << std::endl;
+		std::cout << "darkest secret: " << darkest_secret << std::endl;
+	}
+	else
+		std::cout << "Contact is not created." << std::endl;
 	std::cout << "--------------------" << std::endl;
 }
 
@@ -68,6 +73,7 @@ void Contact::create(void)
 	std::cout << firstname << " " << lastname << "'s darkest secret: ";
 	std::cin >> darkest_secret;
 	std::cout << "====== Saved ======" << std::endl << "-------------------" << std::endl;
+	isCreated = 1;
 }
 
 Contact::~Contact()

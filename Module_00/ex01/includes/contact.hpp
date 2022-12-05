@@ -17,6 +17,7 @@ private:
 	std::string nickname;
 	std::string	phonenumber;
 	std::string	darkest_secret;
+	int isCreated;
 };
 
 

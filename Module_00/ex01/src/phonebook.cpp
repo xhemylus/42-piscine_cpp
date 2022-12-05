@@ -40,7 +40,7 @@ void Phonebook::search(void)
 		std::cout << "Wrong index." << std::endl;
 	}
 	else
-		contact[index].focus();
+		contact[input].focus();
 }
 
 Phonebook::~Phonebook()
