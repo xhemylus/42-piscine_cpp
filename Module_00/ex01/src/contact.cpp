@@ -1,6 +1,4 @@
 #include "contact.hpp"
-#include <iostream>
-#include <iomanip>
 
 Contact::Contact()
 {
@@ -55,7 +53,7 @@ void Contact::focus(void)
 		std::cout << "darkest secret: " << darkest_secret << std::endl;
 	}
 	else
-		std::cout << "Contact is not created." << std::endl;
+		std::cout << "Contact not created." << std::endl;
 	std::cout << "--------------------" << std::endl;
 }
 
@@ -63,15 +61,15 @@ void Contact::create(void)
 {
 	std::cout << "=== New Contact ===" << std::endl;
 	std::cout << "contact's firstname: ";
-	std::cin >> firstname;
+	std::getline(std::cin, firstname);
 	std::cout << firstname << "'s lastname: ";
-	std::cin >> lastname;
+	std::getline(std::cin, lastname);
 	std::cout << firstname << " " << lastname << "'s nickname: ";
-	std::cin >> nickname;
+	std::getline(std::cin, nickname);
 	std::cout << firstname << " " << lastname << "'s phone number: ";
-	std::cin >> phonenumber;
+	std::getline(std::cin, phonenumber);
 	std::cout << firstname << " " << lastname << "'s darkest secret: ";
-	std::cin >> darkest_secret;
+	std::getline(std::cin, darkest_secret);
 	std::cout << "====== Saved ======" << std::endl << "-------------------" << std::endl;
 	isCreated = 1;
 }

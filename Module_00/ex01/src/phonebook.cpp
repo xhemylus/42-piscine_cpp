@@ -1,6 +1,4 @@
 #include "phonebook.hpp"
-#include <iostream>
-#include <iomanip>
 
 Phonebook::Phonebook()
 	: index(-1)
@@ -18,9 +16,10 @@ void Phonebook::add(void)
 
 void Phonebook::search(void)
 {
-	int input;
+	int index;
+	std::string input;
+	std::stringstream ss;
 
-	int i = -1;
 	std::cout << std::setfill (' ') << std::setw(10) << "INDEX";
 	std::cout << "|";
 	std::cout << std::setfill (' ') << std::setw(10) << "FIRSTNAME";
@@ -29,18 +28,18 @@ void Phonebook::search(void)
 	std::cout << "|" ;
 	std::cout << std::setfill (' ') << std::setw(10) << "NICKNAME";
 	std::cout << "|" << std::endl;
-	while (++i < 8)
+
+	for (int i = -1; ++i < 8;)
 		contact[i].print(i);
+	
 	std::cout << "Insert contact index: ";
-	std::cin >> input;
-	if (std::cin.fail() || input > 8 || input < 0)
-	{
-		std::cin.clear();
-		std::cin.ignore();
+	std::getline(std::cin, input);
+	ss << input;
+	ss >> index;
+	if (index > 8 || index < 0 || ss.fail())
 		std::cout << "Wrong index." << std::endl;
-	}
 	else
-		contact[input].focus();
+		contact[index].focus();
 }
 
 Phonebook::~Phonebook()

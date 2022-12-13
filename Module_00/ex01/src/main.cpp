@@ -10,7 +10,7 @@ int main()
 	while (1)
 	{
 		std::cout << "=== PHONEBOOK ===" << std::endl << "> ";
-		std::cin >> command;
+		std::getline(std::cin, command);
 		std::transform(command.begin(), command.end(), command.begin(), ::toupper);
 		if (command == "ADD")
 			phonebook.add();
