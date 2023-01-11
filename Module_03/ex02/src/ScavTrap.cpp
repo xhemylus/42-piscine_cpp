@@ -16,6 +16,12 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 	std::cout << "ScavTrap constructor created." << std::endl;
 };
 
+ScavTrap::ScavTrap(const ScavTrap& src) : ClapTrap(src)
+{
+	std::cout << "ScavTrap copy constructor called." << std::endl;
+	*this = src;
+}
+
 void ScavTrap::guardGate()
 {
 	if (isGuard)

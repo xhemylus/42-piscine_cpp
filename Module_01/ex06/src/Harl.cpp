@@ -13,7 +13,7 @@ Harl::~Harl()
 
 void Harl::complain(std::string level)
 {
-
+	std::transform(level.begin(), level.end(), level.begin(), ::tolower);
 	std::string levels[] =
 		{
 			"debug",
@@ -26,26 +26,32 @@ void Harl::complain(std::string level)
 	for (; i < 4; i++)
 		if (levels[i] == level)
 			break;
-	
 	switch (i)
 	{
 	case (0):
+		std::cout << "[ DEBUG ]" << std::endl;
 		Harl::debug();
 		Harl::info();
 		Harl::warning();
 		Harl::error();
 		break;
 	case (1):
+		std::cout << "[ INFO ]" << std::endl;
 		Harl::info();
 		Harl::warning();
 		Harl::error();
 		break;
 	case (2):
+		std::cout << "[ WARNING ]" << std::endl;
 		Harl::warning();
 		Harl::error();
 		break;
 	case (3):
+		std::cout << "[ ERROR ]" << std::endl;
 		Harl::error();
+		break;
+	case (4):
+		std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 		break;
 	}
 };

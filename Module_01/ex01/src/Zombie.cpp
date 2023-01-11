@@ -14,10 +14,8 @@ Zombie::Zombie(std::string newname)
 
 void Zombie::announce (void) {
 
-    if (name != "foo")
-        std::cout << "<" << name << ">: BraiiiiiiinnnzzzZ..." << std::endl ;
-    else 
-        std::cout << "Foo: BraiiiiiiinnnzzzZ..." << std::endl;
+        std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl ;
+
 
 }
 

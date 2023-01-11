@@ -30,9 +30,9 @@ void Harl::complain(std::string level)
         "error",
     };
 
-    for (int i; i < 4 ; i++)
+    for (int i = 0; i < 4 ; i++)
         if (level == levels[i])
-            (this->*funPTR[i]());
+            (this->*funPTR[i])();
 };
 
 void Harl::debug(void)

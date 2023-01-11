@@ -3,20 +3,16 @@
 
 Zombie::Zombie(std::string newname)
 {
-    name = newname;
+	name = newname;
 }
 
+void Zombie::announce(void)
+{
 
-void Zombie::announce (void) {
-
-    if (name != "foo")
-        std::cout << "<" << name << ">: BraiiiiiiinnnzzzZ..." << std::endl ;
-    else 
-        std::cout << "Foo: BraiiiiiiinnnzzzZ..." << std::endl;
-
+	std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
 
 Zombie::~Zombie()
 {
-    std::cout << name << " destroyed." << std::endl;
+	std::cout << name << " destroyed." << std::endl;
 }

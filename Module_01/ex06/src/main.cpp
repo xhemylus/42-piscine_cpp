@@ -1,17 +1,15 @@
 #include "Harl.hpp"
 #include <iostream>
 
-int main()
+int main(int argc, char **argv)
 {
+    if (argc != 2)
+    {
+        std::cout << "Usage: ./harl [debug|info|warning|error]" << std::endl;
+        return (1);
+    }
     Harl harl;
+    harl.complain(argv[1]);
 
-    harl.complain("debug");
-    std::cout << "-----" << std::endl;
-    harl.complain("info");
-    std::cout << "-----" << std::endl;
-    harl.complain("warning");
-    std::cout << "-----" << std::endl;
-    harl.complain("error");
-    std::cout << "-----" << std::endl;
-    harl.complain("Travaldo");
+    return (0);
 }

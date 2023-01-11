@@ -15,6 +15,7 @@ void Sed::replace(std::string filename, std::string s1, std::string s2)
     std::ifstream oldfile;
     std::ofstream newfile;
     std::string line;
+    std::string::size_type pos;
 
     if (filename.empty())
     {
@@ -33,14 +34,17 @@ void Sed::replace(std::string filename, std::string s1, std::string s2)
             std::cout << "couldn't open file" << std::endl;
             return ;
         };
-    
     while (std::getline(oldfile, line))
     {
-        if (line[line.length() - 1] == '\r')
-            line.erase(line.end()-1);
-        if (line.compare(s1) == 0)
-            newfile << s2 << std::endl;
-        else
-            newfile << line << std::endl;
+        std::cout << line << std::endl;
+        pos = line.find(s1);
+        while(pos != std::string::npos)
+        {
+            line.erase(pos, s1.length());
+            line.insert(pos, s2);
+
+            pos = line.find(s1, pos + s2.length());
+        }
+        newfile << line << std::endl;
     }
 }
