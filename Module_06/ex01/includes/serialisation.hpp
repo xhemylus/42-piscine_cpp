@@ -25,5 +25,4 @@ public:
 	Data *deserialize(uintptr_t raw);
 };
 
-
 #endif
