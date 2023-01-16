@@ -15,8 +15,8 @@ class Fixed
 		~Fixed();
 
 		// Comparaison operators
-		bool operator<(const Fixed& src);
-		bool operator>(const Fixed& src);
+		bool operator<(const Fixed& src) const;
+		bool operator>(const Fixed& src) const;
 		bool operator>=(const Fixed& src);
 		bool operator<=(const Fixed& src);
 		bool operator==(const Fixed& src);
@@ -43,8 +43,10 @@ class Fixed
 		float toFloat(void) const;
 		int toInt(void) const;
 
-		Fixed min(const Fixed& src1, const Fixed& src2);
-		Fixed max(const Fixed& src1, const Fixed& src2);
+		static Fixed &min(Fixed& a, Fixed& b);
+		static Fixed &max(Fixed& a, Fixed& b);
+		static Fixed const &min(const Fixed& a, const Fixed& b);
+		static Fixed const &max(const Fixed& a, const Fixed& b);
 	private:
 		int value;
 		static const int _bits = 8;

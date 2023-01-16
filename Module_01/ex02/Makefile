@@ -6,7 +6,7 @@
 #    By: abollen <abollen@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/18 17:38:23 by abollen           #+#    #+#              #
-#    Updated: 2022/05/17 14:51:12 by abollen          ###   ########.fr        #
+#    Updated: 2023/01/16 09:56:22 by abollen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,4 +43,4 @@ fclean : clean
 
 re: fclean all
 
-re : all clean fclean re
+.PHONY : all clean fclean re

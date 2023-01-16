@@ -6,16 +6,16 @@
 #    By: abollen <abollen@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/18 17:38:23 by abollen           #+#    #+#              #
-#    Updated: 2023/01/16 09:56:10 by abollen          ###   ########.fr        #
+#    Updated: 2023/01/16 09:56:04 by abollen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #***** VARIABLES *****#
 
-PROJECT = Conversion
-NAME = ./Conversion
+PROJECT = Templates
+NAME = ./template
 
-FILES = main.cpp conversion.cpp
+FILES = main.cpp
 OBJ = ${addprefix ${OBJ_DIR}/,${FILES:.cpp=.o}}
 
 SRC_DIR = src

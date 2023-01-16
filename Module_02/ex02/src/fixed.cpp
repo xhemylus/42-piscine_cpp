@@ -9,76 +9,67 @@ std::ostream& operator<<(std::ostream& out, const Fixed& src)
 // Constructors
 Fixed::Fixed()
 {
-	std::cout << "Default constructor called" << std::endl;
+	//std::cout << "Default constructor called" << std::endl;
 	this->value = 0;
 }
 
 Fixed::Fixed(const Fixed& src)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	//std::cout << "Copy constructor called" << std::endl;
 	*this = src;
 }
 
 Fixed::Fixed(const int n)
 {
-	std::cout << "Int constructor called" << std::endl;
-	this->value = n << this->_bits;
+	//std::cout << "Int constructor called" << std::endl;
+	this->value = n << Fixed::_bits;
 }
 
 Fixed::Fixed(const float n)
 {
-	std::cout << "Float constructor called" << std::endl;
-	this->value = roundf(n * (1 << this->_bits));
+	//std::cout << "Float constructor called" << std::endl;
+	this->value = roundf(n * (1 << Fixed::_bits));
 }
 
 Fixed::~Fixed()
 {
-	std::cout << "Destructor called" << std::endl;
+	//std::cout << "Destructor called" << std::endl;
 }
 
 // Operators
 	// Comparaison operators
 
-bool Fixed::operator<(const Fixed& src)
+bool Fixed::operator<(const Fixed& src) const
 {
-	if (this->value < src.value)
-		return true;
-	return false;
+	return (this->getRawBits() < src.getRawBits());
+
 }
 
-bool Fixed::operator>(const Fixed& src)
+bool Fixed::operator>(const Fixed& src) const
 {
-	if (this->value > src.value)
-		return true;
-	return false;
+	return (this->getRawBits() > src.getRawBits());
 }
 
 bool Fixed::operator>=(const Fixed& src)
 {
-	if (this->value >= src.value)
-		return true;
-	return false;
+	return (this->getRawBits() >= src.getRawBits());
 }
 
 bool Fixed::operator<=(const Fixed& src)
 {
-	if (this->value <= src.value)
-		return true;
-	return false;
+	return (this->getRawBits() <= src.getRawBits());
+
 }
 
 bool Fixed::operator==(const Fixed& src)
 {
-	if (this->value == src.value)
-		return true;
-	return false;
+	return (this->getRawBits() == src.getRawBits());
+
 }
 
 bool Fixed::operator!=(const Fixed& src)
 {
-	if (this->value != src.value)
-		return true;
-	return false;
+	return (this->getRawBits() != src.getRawBits());
 }
 
 	// Arithmetic operators
@@ -87,7 +78,7 @@ Fixed Fixed::operator+(const Fixed& src)
 {
 	Fixed tmp(*this);
 
-	tmp.setRawBits(this->value + src.value);
+	tmp.setRawBits(this->getRawBits() + src.getRawBits());
 	return tmp;
 }
 
@@ -95,23 +86,29 @@ Fixed Fixed::operator-(const Fixed& src)
 {
 	Fixed tmp(*this);
 
-	tmp.setRawBits(this->value - src.value);
+	tmp.setRawBits(this->getRawBits() - src.getRawBits());
 	return tmp;
 }
 
 Fixed Fixed::operator*(const Fixed& src)
 {
 	Fixed tmp(*this);
+	long var1, var2;
 
-	tmp.setRawBits(this->toFloat() * src.toFloat());
+	var1 = ((long)this->getRawBits());
+	var2 = ((long)src.getRawBits());
+	tmp.setRawBits((var1 * var2) / (1 << Fixed::_bits));
 	return tmp;
 }
 
 Fixed Fixed::operator/(const Fixed& src)
 {
 	Fixed tmp(*this);
+	long var1, var2;
 
-	tmp.setRawBits(value / src.value);
+	var1 = ((long)this->getRawBits());
+	var2 = ((long)src.getRawBits());
+	tmp.setRawBits((var1 * (1 << Fixed::_bits)) / var2);
 	return tmp;
 }
 
@@ -154,7 +151,7 @@ Fixed &Fixed::operator=(const Fixed& src)
 
 int Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
+	//std::cout << "getRawBits member function called" << std::endl;
 	return this->value;
 }
 
@@ -173,16 +170,50 @@ int Fixed::toInt(void) const
 	return this->value >> this->_bits;
 }
 
-Fixed Fixed::min(const Fixed& src1, const Fixed& src2)
+Fixed &Fixed::min(Fixed& a, Fixed& b)
 {
-	if (src1.getRawBits() < src2.getRawBits())
-		return src1;
-	return src2;
+	if (a < b)
+		return a;
+	return b;
 }
 
-Fixed Fixed::max(const Fixed& src1, const Fixed& src2)
+Fixed const &Fixed::min(const Fixed& a, const Fixed& b)
 {
-	if (src1.getRawBits() > src2.getRawBits())
-		return src1;
-	return src2;
+	if (a < b)
+		return a;
+	return b;
+}
+
+Fixed &min(Fixed& a, Fixed& b)
+{
+	return (Fixed::min(a, b));
+}
+
+Fixed const &min(const Fixed& a, const Fixed& b)
+{
+	return (Fixed::min(a, b));
+}
+
+Fixed &Fixed::max(Fixed& a, Fixed& b)
+{
+	if (a > b)
+		return a;
+	return b;
+}
+
+Fixed const &Fixed::max(const Fixed& a, const Fixed& b)
+{
+	if (a > b)
+		return a;
+	return b;
+}
+
+Fixed const &max(Fixed const &a, Fixed const &b)
+{
+	return (Fixed::max(a, b));
+}
+
+Fixed &max(Fixed& a, Fixed& b)
+{
+	return (Fixed::max(a, b));
 }
