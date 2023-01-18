@@ -1,64 +1,103 @@
+#include <iostream>
+#include <stdlib.h>
+
+#include "intern.hpp"
 #include "bureaucrat.hpp"
-#include "form.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 
+#define BREAKLINE std::cout << "###" << std::endl;
+
 int main(void)
 {
-	std::cout << "Test 1" << std::endl;
-	Bureaucrat	a("Newhire", 150);
-	Bureaucrat	b("Project Lead", 40);
-	Bureaucrat	c("Director", 3);
-	Bureaucrat	d("Employee", 100);
-	PresidentialPardonForm pardon("Jibby");
-	RobotomyRequestForm	robo("Cop");
-	ShrubberyCreationForm tree("Park");
-	std::cout << a;
-	std::cout << d;
-	std::cout << b;
-	std::cout << c;
-	std::cout << pardon;
-	std::cout << robo;
-	std::cout << tree;
-	std::cout << std::endl;
-	std::cout << "Test 1" << std::endl;
+	srand(time(NULL));
+	Intern someIntern;
+
+	Bureaucrat supervisor("Supervisor", 1);
+	std::cout << supervisor << std::endl;
+	Bureaucrat jack("Jack", 25);
+	std::cout << jack << std::endl;
+
+	Form *shrub = someIntern.makeForm("Shrubbery", "home");
+	std::cout << *shrub << std::endl;
+	shrub->beSigned(supervisor);
+	shrub->execute(jack);
+
+	Form *pres = someIntern.makeForm("Presidential", "Jack");
+	std::cout << *pres << std::endl;
+	supervisor.signForm(*pres);
+	pres->execute(supervisor);
+
+	Form *robot = someIntern.makeForm("Robotomy", "Bender");
+	std::cout << *robot << std::endl;
+	robot->beSigned(supervisor);
+	robot->execute(jack);
+	jack.executeForm(*robot);
+	jack.executeForm(*robot);
+	BREAKLINE
+
+	try
 	{
-		a.signForm(pardon);
-		d.signForm(pardon);
-		b.signForm(pardon);
-		c.signForm(pardon);
-		a.executeForm(pardon);
-		d.executeForm(pardon);
-		b.executeForm(pardon);
-		c.executeForm(pardon);
-		std::cout << std::endl;
+		Form *ran = someIntern.makeForm("Random Form", "nobody");
+		std::cout << ran << std::endl;
 	}
-	std::cout << "Test 2" << std::endl;
+	catch(std::exception const &e)
 	{
-		c.executeForm(robo);
-		a.signForm(robo);
-		d.signForm(robo);
-		b.signForm(robo);
-		c.signForm(robo);
-		a.executeForm(robo);
-		d.executeForm(robo);
-		b.executeForm(robo);
-		c.executeForm(robo);
-		std::cout << std::endl;
+		std::cerr << "Exception: " << e.what() << std::endl;
 	}
-	std::cout << "Test 3" << std::endl;
+	BREAKLINE
+
+	try
 	{
-		d.executeForm(tree);
-		a.signForm(tree);
-		d.signForm(tree);
-		b.signForm(tree);
-		c.signForm(tree);
-		a.executeForm(tree);
-		d.executeForm(tree);
-		b.executeForm(tree);
-		c.executeForm(tree);
-		std::cout << std::endl;
+		jack.executeForm(*pres);
 	}
+	catch(std::exception const &e)
+	{
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
+	BREAKLINE
+
+	try
+	{
+		RobotomyRequestForm robot = RobotomyRequestForm("Bender");
+		std::cout << robot << std::endl;
+		robot.execute(supervisor);
+	}
+	catch(std::exception const &e)
+	{
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
+	BREAKLINE
+
+	try
+	{
+		PresidentialPardonForm pres = PresidentialPardonForm("Jack");
+		std::cout << pres << std::endl;
+		supervisor.signForm(pres);
+		pres.execute(jack);
+	}
+	catch(std::exception const &e)
+	{
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
+	BREAKLINE
+
+	try
+	{
+		PresidentialPardonForm pres = PresidentialPardonForm("Jack");
+		std::cout << pres << std::endl;
+		supervisor.signForm(pres);
+		jack.executeForm(pres);
+	}
+	catch(std::exception const &e)
+	{
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
+
+	delete shrub;
+	delete pres;
+	delete robot;
+
 	return (0);
 }

@@ -2,23 +2,31 @@
 #define INTERN_HPP
 
 #include <iostream>
+#include "form.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
-class intern
+class Intern
 {
 private:
 	/* data */
 public:
-	intern(/* args */);
-	intern
-	~intern();
+	Intern();
+	Intern(const Intern &src);
+	~Intern();
 
-	Form *makeForm(std::string formname, )
+	Intern &operator=(const Intern &src);
+
+	Form *makeForm(const std::string form, const std::string target);
+
+	class InvalidForm : public std::exception
+		{
+			public:
+				const char *what() const throw();
+		};
+
+	
 };
 
-intern::intern(/* args */)
-{
-}
-
-intern::~intern()
-{
-}
+#endif

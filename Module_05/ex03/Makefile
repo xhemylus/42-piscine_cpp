@@ -6,7 +6,7 @@
 #    By: abollen <abollen@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/18 17:38:23 by abollen           #+#    #+#              #
-#    Updated: 2022/06/07 14:46:19 by abollen          ###   ########.fr        #
+#    Updated: 2023/01/18 12:05:43 by abollen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 PROJECT = Bureaucrat
 NAME = ./bureaucrat
 
-FILES = main.cpp bureaucrat.cpp form.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp
+FILES = main.cpp bureaucrat.cpp form.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp intern.cpp
 OBJ = ${addprefix ${OBJ_DIR}/,${FILES:.cpp=.o}}
 
 SRC_DIR = src
@@ -52,4 +52,4 @@ fclean : clean
 
 re: fclean all
 
-re : all clean fclean re
+.PHONY : all clean fclean re
