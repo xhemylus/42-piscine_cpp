@@ -6,16 +6,16 @@
 #    By: abollen <abollen@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/18 17:38:23 by abollen           #+#    #+#              #
-#    Updated: 2023/01/18 10:47:29 by abollen          ###   ########.fr        #
+#    Updated: 2022/06/07 14:46:19 by abollen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #***** VARIABLES *****#
 
-PROJECT = Templates
-NAME = ./template
+PROJECT = Bureaucrat
+NAME = ./bureaucrat
 
-FILES = main.cpp
+FILES = main.cpp bureaucrat.cpp form.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp
 OBJ = ${addprefix ${OBJ_DIR}/,${FILES:.cpp=.o}}
 
 SRC_DIR = src
@@ -32,7 +32,7 @@ all : ${OBJ_DIR} ${NAME}
 
 ${OBJ_DIR}/%.o : ${SRC_DIR}/%.cpp ${HEADER}
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo "\033[36m[${PROJECT}]\033[92m[BUILD]\033[97m $@."
+	@echo "\033[95m[${PROJECT}]\033[92m[BUILD]\033[97m $@."
 
 $(NAME): ${OBJ}
 	@${CC} ${OBJ} -o ${NAME}
@@ -52,4 +52,4 @@ fclean : clean
 
 re: fclean all
 
-.PHONY : all clean fclean re
+re : all clean fclean re
