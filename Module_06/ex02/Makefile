@@ -6,16 +6,16 @@
 #    By: abollen <abollen@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/18 17:38:23 by abollen           #+#    #+#              #
-#    Updated: 2023/01/17 12:51:00 by abollen          ###   ########.fr        #
+#    Updated: 2023/01/16 14:56:52 by abollen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #***** VARIABLES *****#
 
-PROJECT = FragTrap
-NAME = ./fragtrap
+PROJECT = Identify
+NAME = ./identify
 
-FILES = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
+FILES = main.cpp
 OBJ = ${addprefix ${OBJ_DIR}/,${FILES:.cpp=.o}}
 
 SRC_DIR = src
@@ -30,12 +30,12 @@ CFLAGS = -Wall -Wextra -Werror -Iincludes -std=c++98
 
 all : ${OBJ_DIR} ${NAME}
 
-${OBJ_DIR}/%.o : ${SRC_DIR}/%.cpp ${HEADER}
+${OBJ_DIR}/%.o : ${SRC_DIR}/%.cpp
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "\033[95m[${PROJECT}]\033[92m[BUILD]\033[97m $@."
 
-$(NAME): ${OBJ}
-	@${CC} ${OBJ} -o ${NAME}
+$(NAME): $(OBJ)
+	@$(CC) $(OBJ) -o $(NAME)
 	@echo "\033[36m[${PROJECT}]\033[92m[BUILD] \033[0m${NAME}"
 
 ${OBJ_DIR}:
@@ -44,7 +44,7 @@ ${OBJ_DIR}:
 
 clean :
 	@rm -rf ${OBJ_DIR}
-	@echo "\033[36m[${PROJECT}]\033[93m[CLEAN] \033[0m${OBJ}"
+	@echo "\033[36m[${PROJECT}]\033[93m[CLEAN] \033[0m${OBJ_DIR} folder"
 
 fclean : clean
 	@rm -rf ${NAME}
