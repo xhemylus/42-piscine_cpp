@@ -25,15 +25,27 @@ Intern &Intern::operator=(const Intern &src)
 
 Form* Intern::makeForm(const std::string form, const std::string target)
 {
-	if (form == "Presidential")
-		return (new PresidentialPardonForm(target));
-	else if (form == "Robotomy")
-		return (new RobotomyRequestForm(target));
-	else if (form == "Shrubbery")
-		return (new ShrubberyCreationForm(target));
-	else 
-		throw Intern::InvalidForm();
+	Form *(*Forms[])(const std::string target) = {makePres, makeShrub, makeRob};
+	std::string tabs[] = {"Presidential", "Shrubbery" ,"Robotomy"};
+
+	for (int i = 0 ; i < 3 ; i++)
+		if (form == tabs[i])
+			return (Forms[i](target));
+	throw Intern::InvalidForm();
 	return (NULL);
+}
+
+Form* Intern::makePres(const std::string target)
+{
+	return (new PresidentialPardonForm(target));
+}
+Form* Intern::makeShrub(const std::string target)
+{
+	return (new ShrubberyCreationForm(target));
+}
+Form* Intern::makeRob(const std::string target)
+{
+	return (new RobotomyRequestForm(target));
 }
 
 const char *Intern::InvalidForm::what() const throw()

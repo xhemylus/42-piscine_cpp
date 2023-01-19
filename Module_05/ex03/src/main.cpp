@@ -18,16 +18,20 @@ int main(void)
 	std::cout << supervisor << std::endl;
 	Bureaucrat jack("Jack", 25);
 	std::cout << jack << std::endl;
-
+	std::cout << "- - - - - - - - - -" << std::endl;
 	Form *shrub = someIntern.makeForm("Shrubbery", "home");
 	std::cout << *shrub << std::endl;
-	shrub->beSigned(supervisor);
-	shrub->execute(jack);
+	supervisor.signForm(*shrub);
+	jack.executeForm(*shrub);
+	std::cout << "- - - - - - - - - -" << std::endl;
 
 	Form *pres = someIntern.makeForm("Presidential", "Jack");
 	std::cout << *pres << std::endl;
 	supervisor.signForm(*pres);
-	pres->execute(supervisor);
+	supervisor.executeForm(*pres);
+	jack.executeForm(*pres);
+	std::cout << "- - - - - - - - - -" << std::endl;
+
 
 	Form *robot = someIntern.makeForm("Robotomy", "Bender");
 	std::cout << *robot << std::endl;

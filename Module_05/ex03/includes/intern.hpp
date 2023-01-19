@@ -19,14 +19,15 @@ public:
 	Intern &operator=(const Intern &src);
 
 	Form *makeForm(const std::string form, const std::string target);
+	static Form *makeShrub(const std::string target);
+	static Form *makePres(const std::string target);
+	static Form *makeRob(const std::string target);
 
 	class InvalidForm : public std::exception
-		{
-			public:
-				const char *what() const throw();
-		};
-
-	
+	{
+	public:
+		const char *what() const throw();
+	};
 };
 
 #endif
