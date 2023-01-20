@@ -57,24 +57,26 @@ void Span::addRangeOfIterators(std::vector<int>::iterator begin, std::vector<int
 
 int Span::shortestSpan()
 {
-	if (this->_container.size() < 2)
+	std::vector<int> tmp = this->_container;
+	if (tmp.size() < 2)
 		throw NotEnoughNumbersException();
-	std::sort(this->_container.begin(), this->_container.end());
-	int shortest = this->_container[1] - this->_container[0];
-	for (unsigned int i = 1; i < this->_container.size() - 1; i++)
+	std::sort(tmp.begin(), tmp.end());
+	int shortest = tmp[1] - tmp[0];
+	for (unsigned int i = 1; i < tmp.size() - 1; i++)
 	{
-		if (this->_container[i + 1] - this->_container[i] < shortest)
-			shortest = this->_container[i + 1] - this->_container[i];
+		if (tmp[i + 1] - tmp[i] < shortest)
+			shortest = tmp[i + 1] - tmp[i];
 	}
 	return shortest;
 }
 
 int Span::longestSpan()
 {
-	if (this->_container.size() < 2)
+	std::vector<int> tmp = this->_container;
+	if (tmp.size() < 2)
 		throw NotEnoughNumbersException();
-	std::sort(this->_container.begin(), this->_container.end());
-	return (this->_container[this->_container.size() - 1] - this->_container[0]);
+	std::sort(tmp.begin(), tmp.end());
+	return (tmp[tmp.size() - 1] - tmp[0]);
 }
 
 const char *Span::FullContainerException::what() const throw()
