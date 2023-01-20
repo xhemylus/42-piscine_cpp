@@ -6,14 +6,14 @@
 #    By: abollen <abollen@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/18 17:38:23 by abollen           #+#    #+#              #
-#    Updated: 2023/01/20 08:55:45 by abollen          ###   ########.fr        #
+#    Updated: 2023/01/20 08:55:31 by abollen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #***** VARIABLES *****#
 
-PROJECT = Array
-NAME = ./array
+PROJECT = Span
+NAME = ./span
 
 FILES = main.cpp
 OBJ = ${addprefix ${OBJ_DIR}/,${FILES:.cpp=.o}}
