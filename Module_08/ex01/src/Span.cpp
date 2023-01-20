@@ -58,14 +58,15 @@ void Span::addRangeOfIterators(std::vector<int>::iterator begin, std::vector<int
 int Span::shortestSpan()
 {
 	std::vector<int> tmp = this->_container;
+	std::vector<int>::iterator it = tmp.begin();
 	if (tmp.size() < 2)
 		throw NotEnoughNumbersException();
 	std::sort(tmp.begin(), tmp.end());
-	int shortest = tmp[1] - tmp[0];
-	for (unsigned int i = 1; i < tmp.size() - 1; i++)
+	int shortest = *(it + 1) - *it;
+	for (it++ ;it != tmp.end() - 1; it++)
 	{
-		if (tmp[i + 1] - tmp[i] < shortest)
-			shortest = tmp[i + 1] - tmp[i];
+		if (*(it + 1) - *it < shortest)
+			shortest = *(it + 1) - *it;
 	}
 	return shortest;
 }
@@ -76,7 +77,7 @@ int Span::longestSpan()
 	if (tmp.size() < 2)
 		throw NotEnoughNumbersException();
 	std::sort(tmp.begin(), tmp.end());
-	return (tmp[tmp.size() - 1] - tmp[0]);
+	return (tmp.back() - tmp.front());
 }
 
 const char *Span::FullContainerException::what() const throw()

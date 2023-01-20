@@ -47,7 +47,7 @@ int main()
 	{
 		std::vector<int> test;
 		for (int i = 0 ; i < 100 ; i++)
-			test.push_back(i * 10);
+			test.push_back(i * 2);
 
 		Span sp = Span(100);
 		try
@@ -76,7 +76,27 @@ int main()
 		}
 	}
 
-
+	{
+        Span sp = Span(10000);
+        sp.addRandom();
+        try
+        {
+            std::cout << sp.shortestSpan() << std::endl;
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << std::endl;
+        }
+        try
+        {
+            std::cout << sp.longestSpan() << std::endl;
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << std::endl;
+        }
+        std::cout << "# End of scope #" << std::endl;
+    }
 
 	return 0;
 }
