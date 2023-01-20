@@ -17,13 +17,19 @@ public:
 	shortestSpan();
 	longestSpan();
 
-	class ErrorException : public std::exception
+	class FullContainerException : public std::exception
+	{
+		public: 
+			virtual const char *what() const throw();
+	}
+
+	class NotEnoughNumbersException : public std::exception
 	{
 		public: 
 			virtual const char *what() const throw();
 	}
 
 private:
-	int *span;
+	int *_container;
 	unsigned int _size;
 }
