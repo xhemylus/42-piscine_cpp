@@ -11,11 +11,13 @@ public:
 	{
 		std::cout << "MutantStack constructor called" << std::endl;
 	};
+
 	MutantStack(const MutantStack<T> &src)
 	{
 		std::cout << "MutantStack copy constructor called" << std::endl;
 		*this = src;
 	};
+	
 	~MutantStack()
 	{
 		std::cout << "MutantStack destructor called" << std::endl;
