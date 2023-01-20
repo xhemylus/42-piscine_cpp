@@ -45,6 +45,11 @@ int main()
 	}
 
 	{
+		std::vector<int> test;
+		for (int i = 0 ; i < 100 ; i++)
+			test.push_back(i * 10);
+
+		Span sp = Span(100);
 		try
 		{
 			sp.addRangeOfIterators(test.begin(), test.end());
