@@ -1,8 +1,6 @@
 #include "rpn.hpp"
 
-rpn::rpn()
-{
-};
+rpn::rpn(){};
 
 rpn::rpn(rpn const &src)
 {
@@ -15,26 +13,29 @@ rpn &rpn::operator=(rpn const &src)
 	return *this;
 };
 
-rpn::~rpn()
-{
-};
+rpn::~rpn(){};
 
-int rpn::Calculate(int a, int b, char op)
+int rpn::Calculate(char op)
 {
-	std::cout << a << " " << b << " " << op << std::endl;
+	int n2 = _stack.top();
+	_stack.pop();
+	if (_stack.empty())
+		throw std::runtime_error("Invalid input");
+	int n1 = _stack.top();
+	_stack.pop();
 	switch (op)
 	{
 	case '+':
-		return (a + b);
+		return (n1 + n2);
 	case '-':
-		return (b - a);
+		return (n1 - n2);
 	case '*':
-		return (a * b);
+		return (n1 * n2);
 	case '/':
 	{
-			if (a == 0)
-				throw std::runtime_error("Division by zero");
-		return (b / a);
+		if (n2 == 0)
+			throw std::runtime_error("Division by zero");
+		return (n1 / n2);
 	}
 	default:
 		throw std::runtime_error("Invalid operator");
@@ -47,6 +48,7 @@ void rpn::ParseInput(std::string input)
 	int num = 0;
 	int ope = 0;
 
+
 	for (size_t i = 0; i < input.length(); i++)
 	{
 		if (isdigit(input[i]))
@@ -57,12 +59,7 @@ void rpn::ParseInput(std::string input)
 		else if (operators.find(input[i]) != std::string::npos)
 		{
 			ope++;
-			int a = _stack.top();
-			_stack.pop();
-			if (_stack.empty())
-				throw std::runtime_error("Invalid input");
-			_stack.push(Calculate(a, _stack.top(), input[i]));
-
+			_stack.push(Calculate(input[i]));
 		}
 		else if (input[i] == ' ')
 			continue;

@@ -16,5 +16,5 @@ public:
 
 
 	void ParseInput(std::string input);
-	int Calculate(int a, int b, char op);
+	int Calculate(char op);
 };
