@@ -46,7 +46,7 @@ void BitcoinExchange::ReadDatabase(std::string path)
 	std::string line;
 
 	std::cout << "Reading database: " << path << std::endl;
-	Inputfile.open(path.c_str().c_str());
+	Inputfile.open(path.c_str());
 	if (!Inputfile.is_open())
 		throw std::runtime_error("Error: file not found");
 	std::getline(Inputfile, line);
