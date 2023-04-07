@@ -46,13 +46,13 @@ void BitcoinExchange::ReadDatabase(std::string path)
 	std::string line;
 
 	std::cout << "Reading database: " << path << std::endl;
-	Inputfile.open(path);
+	Inputfile.open(path.c_str());
 	if (!Inputfile.is_open())
 		throw std::runtime_error("Error: file not found");
 	std::getline(Inputfile, line);
 	while (std::getline(Inputfile, line))
 	{
-		std::string date = line.substr(0, line.find('|'));
+		std::string date = line.substr(0, line.find('|') - 1);
 		int year = std::stoi(date.substr(0, 4));
 		int month = std::stoi(date.substr(5, 2));
 		int day = std::stoi(date.substr(8, 2));
@@ -80,7 +80,7 @@ int BitcoinExchange::InputChecker(int year, int month, int day, std::string numb
 		return (1);
 	}
 
-	if (year < 2009 || year > 2019)
+	if (year < 2009)
 	{
 		std::cout << "Error: bad input => " << line << std::endl;
 		return (1);

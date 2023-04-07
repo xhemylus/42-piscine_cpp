@@ -10,7 +10,7 @@ class BitcoinExchange
 private:
 	std::map<std::string, float> _database;
 public:
-	BitcoinExchange(/* args */);
+	BitcoinExchange();
 	BitcoinExchange(const BitcoinExchange &src);
 	BitcoinExchange &operator=(const BitcoinExchange &src);
 	~BitcoinExchange();

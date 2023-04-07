@@ -21,7 +21,7 @@ OBJ = ${addprefix ${OBJ_DIR}/,${FILES:.cpp=.o}}
 SRC_DIR = src
 OBJ_DIR = obj
 
-HEADER = includes
+HEADER = includes/rpn.hpp
 
 CC = c++
 CFLAGS = -Iincludes -std=c++98

@@ -21,7 +21,7 @@ OBJ = ${addprefix ${OBJ_DIR}/,${FILES:.cpp=.o}}
 SRC_DIR = src
 OBJ_DIR = obj
 
-HEADER = includes
+HEADER = includes/BitcoinExchange.hpp
 
 CC = c++
 CFLAGS = -Iincludes -std=c++98
@@ -30,7 +30,7 @@ CFLAGS = -Iincludes -std=c++98
 
 all : ${OBJ_DIR} ${NAME}
 
-${OBJ_DIR}/%.o : ${SRC_DIR}/%.cpp ${HEADER}
+${OBJ_DIR}/%.o : ${SRC_DIR}/%.cpp ${HEADER} Makefile
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "\033[95m[${PROJECT}]\033[92m[BUILD]\033[97m $@."
 

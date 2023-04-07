@@ -21,6 +21,7 @@ rpn::~rpn()
 
 int rpn::Calculate(int a, int b, char op)
 {
+	std::cout << a << " " << b << " " << op << std::endl;
 	switch (op)
 	{
 	case '+':
@@ -31,7 +32,7 @@ int rpn::Calculate(int a, int b, char op)
 		return (a * b);
 	case '/':
 	{
-			if (b == 0)
+			if (a == 0)
 				throw std::runtime_error("Division by zero");
 		return (b / a);
 	}
@@ -58,7 +59,10 @@ void rpn::ParseInput(std::string input)
 			ope++;
 			int a = _stack.top();
 			_stack.pop();
+			if (_stack.empty())
+				throw std::runtime_error("Invalid input");
 			_stack.push(Calculate(a, _stack.top(), input[i]));
+
 		}
 		else if (input[i] == ' ')
 			continue;
