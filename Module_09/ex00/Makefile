@@ -24,7 +24,7 @@ OBJ_DIR = obj
 HEADER = includes/BitcoinExchange.hpp
 
 CC = c++
-CFLAGS = -Iincludes -std=c++98
+CFLAGS = -Wall -Werror -Wextra -Iincludes -std=c++98
 
 #***** RULES *****#
 

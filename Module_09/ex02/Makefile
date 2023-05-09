@@ -24,13 +24,13 @@ OBJ_DIR = obj
 HEADER = includes/pmergeme.hpp
 
 CC = c++
-CFLAGS = -Iincludes -std=c++98
+CFLAGS = -Wall -Werror -Wextra -Iincludes -std=c++98
 
 #***** RULES *****#
 
 all : ${OBJ_DIR} ${NAME}
 
-${OBJ_DIR}/%.o : ${SRC_DIR}/%.cpp ${HEADER}
+${OBJ_DIR}/%.o : ${SRC_DIR}/%.cpp ${HEADER} Makefile
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "\033[95m[${PROJECT}]\033[92m[BUILD]\033[97m $@."
 

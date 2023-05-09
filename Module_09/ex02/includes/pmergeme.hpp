@@ -24,7 +24,7 @@ private:
 };
 
 template <typename T, typename U, typename V> 
-void vecsort(int argc, char **argv, T &vect, U &a, V &b, unsigned int tmp, bool odd, int opt)
+void vecsort(int argc, T &vect, U &a, V &b, unsigned int tmp, bool odd, int opt)
 {
 	struct timeval start, end;
 	long sec, usec;
@@ -53,7 +53,7 @@ void vecsort(int argc, char **argv, T &vect, U &a, V &b, unsigned int tmp, bool 
 	std::cout << "After : ";
 	if (argc < 6)
 	{
-		for (int i = 0; i < a.size(); i++)
+		for (size_t i = 0; i < a.size(); i++)
 			std::cout << a[i] << " ";
 	}
 	else

@@ -71,9 +71,9 @@ void PMergeMe::holder(int argc, char **argv)
 	std::vector<unsigned int> b;
 	std::deque<unsigned int> c;
 	std::deque<unsigned int> d;
-	vecsort(argc, argv, vect, a, b, tmp, odd, 1);
+	vecsort(argc, vect, a, b, tmp, odd, 1);
 
-	vecsort(argc, argv, list, c, d, tmp, odd, 0);
+	vecsort(argc, list, c, d, tmp, odd, 0);
 
 
 }
