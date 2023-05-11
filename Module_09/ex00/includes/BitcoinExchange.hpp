@@ -9,7 +9,7 @@
 class BitcoinExchange
 {
 private:
-	std::map<std::string, float> _database;
+	std::map<int, float> _database;
 public:
 	BitcoinExchange();
 	BitcoinExchange(const BitcoinExchange &src);
@@ -19,6 +19,6 @@ public:
 	void SetDatabase();
 	void ReadDatabase(std::string path);
 
-	int InputChecker(int year, int month, int day, std::string number, float bitcoin, std::string line);
-	void PrintRate(std::string date, float bitcoin);
+	int InputChecker(int year, int month, int day, float bitcoin, std::string line);
+	void PrintRate(int date, std::string numdate, float bitcoin);
 };

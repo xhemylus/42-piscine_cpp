@@ -21,7 +21,7 @@ OBJ = ${addprefix ${OBJ_DIR}/,${FILES:.cpp=.o}}
 SRC_DIR = src
 OBJ_DIR = obj
 
-HEADER = includes/rpn.hpp
+HEADER = includes/rpn.hpp includes
 
 CC = c++
 CFLAGS = -Wall -Werror -Wextra -Iincludes -std=c++98
@@ -36,19 +36,27 @@ ${OBJ_DIR}/%.o : ${SRC_DIR}/%.cpp ${HEADER} Makefile
 
 $(NAME): ${OBJ}
 	@${CC} ${OBJ} -o ${NAME}
-	@echo "\033[36m[${PROJECT}]\033[92m[BUILD] \033[0m${NAME}"
+	@echo "\033[95m[${PROJECT}]\033[92m[BUILD] \033[0m${NAME}"
+	@echo "\x1b[38;5;207m      :::::::::  :::::::::  ::::    ::: ";
+	@echo "\x1b[38;5;201m     :+:    :+: :+:    :+: :+:+:   :+:  ";
+	@echo "\x1b[38;5;165m    +:+    +:+ +:+    +:+ :+:+:+  +:+   ";
+	@echo "\x1b[38;5;129m   +#++:++#:  +#++:++#+  +#+ +:+ +#+    ";
+	@echo "\x1b[38;5;105m  +#+    +#+ +#+        +#+  +#+#+#     ";
+	@echo "\x1b[38;5;69m #+#    #+# #+#        #+#   #+#+#      ";
+	@echo "\x1b[38;5;45m###    ### ###        ###    ####       ";
+
 
 ${OBJ_DIR}:
 	@mkdir obj
-	@echo "\033[36m[${PROJECT}]\033[92m[BUILD] \033[0m${OBJ_DIR} folder"
+	@echo "\033[95m[${PROJECT}]\033[92m[BUILD] \033[0m${OBJ_DIR} folder"
 
 clean :
 	@rm -rf ${OBJ_DIR}
-	@echo "\033[36m[${PROJECT}]\033[93m[CLEAN] \033[0m${OBJ}"
+	@echo "\033[95m[${PROJECT}]\033[93m[CLEAN] \033[0m${OBJ}"
 
 fclean : clean
 	@rm -rf ${NAME}
-	@echo "\033[36m[${PROJECT}]\033[93m[CLEAN] \033[0m${NAME}"
+	@echo "\033[95m[${PROJECT}]\033[93m[CLEAN] \033[0m${NAME}"
 
 re: fclean all
 

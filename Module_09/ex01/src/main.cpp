@@ -17,5 +17,6 @@ int main(int argc, char **argv)
 		std::cout << e.what() << std::endl;
 		return 1;
 	}
+	std::cout << "Online tester : https://t.ly/-ZtK" << std::endl;
 	return 0;
 }

@@ -19,6 +19,15 @@ BitcoinExchange::~BitcoinExchange()
 {
 };
 
+int toNumDate(std::string date)
+{
+	int year = atoi(date.substr(0, 4).c_str());
+	int month = atoi(date.substr(5, 2).c_str());
+	int day = atoi(date.substr(8, 2).c_str());
+	int numdate = year * 10000 + month * 100 + day;
+	return (numdate);
+}
+
 void BitcoinExchange::SetDatabase()
 {
 	std::ifstream Exchangefile;
@@ -28,14 +37,16 @@ void BitcoinExchange::SetDatabase()
 	Exchangefile.open("./data.csv");
 	if (!Exchangefile.is_open())
 		throw std::runtime_error("Error: file not found");
+	std::getline(Exchangefile, line);
 	while (std::getline(Exchangefile, line))
 	{
 		std::string date = line.substr(0, line.find(','));
+		int numdate = toNumDate(date);
 		std::string price = line.substr(line.find(',') + 1, line.length());
 		std::stringstream tofloat;
 		tofloat << price;
 		tofloat >> pricefloat;
-		_database[date] = pricefloat;
+		_database[numdate] = pricefloat;
 	}
 	Exchangefile.close();
 }
@@ -64,14 +75,17 @@ void BitcoinExchange::ReadDatabase(std::string path)
 		tofloat << number;
 		tofloat >> bitcoin;
 
-		if (InputChecker(year, month, day, number, bitcoin, line) == 0)
-			PrintRate(date, bitcoin);
+		if (InputChecker(year, month, day, bitcoin, line) == 0)
+		{
+			int numdate = toNumDate(date);
+			PrintRate(numdate, date, bitcoin);
+		}
 		
 	}
 	Inputfile.close();
 }
 
-int BitcoinExchange::InputChecker(int year, int month, int day, std::string number, float bitcoin, std::string line)
+int BitcoinExchange::InputChecker(int year, int month, int day,  float bitcoin, std::string line)
 {
 	size_t pos = line.find('|');
 	if (pos == std::string::npos || line[pos - 1] != ' ' || line[pos + 1] != ' ')
@@ -108,17 +122,19 @@ int BitcoinExchange::InputChecker(int year, int month, int day, std::string numb
 	return (0);
 }
 
-void BitcoinExchange::PrintRate(std::string date, float bitcoin)
+void BitcoinExchange::PrintRate(int numdate, std::string date, float bitcoin)
 {
-	std::map<std::string, float>::const_iterator it = _database.begin();
+	std::map<int, float>::const_iterator it = _database.begin();
 	for (; it != _database.end(); ++it)
 	{
-		if (it->first == date)
+		if (it->first == numdate)
 		{
 			std::cout << date << " => " << bitcoin << " = " << it->second * bitcoin << std::endl;
 			return ;
 		}
 	}
-	it = _database.lower_bound(date);
+	it = _database.lower_bound(numdate);
+	if (it != _database.begin())
+		it--;
 	std::cout << date << " => " << bitcoin << " = " << it->second * bitcoin << std::endl;
 }

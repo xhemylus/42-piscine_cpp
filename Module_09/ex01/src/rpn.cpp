@@ -15,13 +15,13 @@ rpn &rpn::operator=(rpn const &src)
 
 rpn::~rpn(){};
 
-int rpn::Calculate(char op)
+float rpn::Calculate(char op)
 {
-	int n2 = _stack.top();
+	float n2 = _stack.top();
 	_stack.pop();
 	if (_stack.empty())
 		throw std::runtime_error("Invalid input");
-	int n1 = _stack.top();
+	float n1 = _stack.top();
 	_stack.pop();
 	switch (op)
 	{
@@ -68,5 +68,6 @@ void rpn::ParseInput(std::string input)
 	}
 	if (ope + 1 != num)
 		throw std::runtime_error("Invalid input");
-	std::cout << _stack.top() << std::endl;
+	int result = _stack.top();
+	std::cout << result << std::endl;
 }
