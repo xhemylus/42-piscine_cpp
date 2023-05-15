@@ -3,10 +3,10 @@
 int main(int argc, char **argv)
 {
 	BitcoinExchange btc;
-	if (argc == 2)
-	{
 		try
 		{
+			if (argc != 2)
+				throw BadUsage();
 			btc.SetDatabase();
 			btc.ReadDatabase(argv[1]);
 			return (0);
@@ -16,7 +16,6 @@ int main(int argc, char **argv)
 			std::cerr << e.what() << '\n';
 		}
 		
-	}
-	std::cout << "Usage: ./bitcoinexchange <database1>" << std::endl;
+
 	return (1);
 }

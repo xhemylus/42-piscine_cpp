@@ -2,14 +2,11 @@
 
 int main(int argc, char **argv)
 {
-	if (argc != 2)
-	{
-		std::cout << "Usage: ./ex01 \"<expression>\"" << std::endl;
-		return 1;
-	}
 	rpn calc;
 	try
 	{
+		if (argc != 2)
+			throw Badusage();
 		calc.ParseInput(argv[1]);
 	}
 	catch (std::exception &e)

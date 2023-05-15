@@ -20,7 +20,7 @@ float rpn::Calculate(char op)
 	float n2 = _stack.top();
 	_stack.pop();
 	if (_stack.empty())
-		throw std::runtime_error("Invalid input");
+		throw InvalidInput();
 	float n1 = _stack.top();
 	_stack.pop();
 	switch (op)
@@ -34,7 +34,7 @@ float rpn::Calculate(char op)
 	case '/':
 	{
 		if (n2 == 0)
-			throw std::runtime_error("Division by zero");
+			throw DivisionByZero();
 		return (n1 / n2);
 	}
 	default:
@@ -64,10 +64,10 @@ void rpn::ParseInput(std::string input)
 		else if (input[i] == ' ')
 			continue;
 		else
-			throw std::runtime_error("Invalid input");
+			throw InvalidInput();
 	}
 	if (ope + 1 != num)
-		throw std::runtime_error("Invalid input");
-	int result = _stack.top();
+		throw InvalidInput();
+	float result = _stack.top();
 	std::cout << result << std::endl;
 }

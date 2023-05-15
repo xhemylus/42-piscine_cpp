@@ -21,24 +21,25 @@ BitcoinExchange::~BitcoinExchange()
 
 int toNumDate(std::string date)
 {
-	int year = atoi(date.substr(0, 4).c_str());
-	int month = atoi(date.substr(5, 2).c_str());
-	int day = atoi(date.substr(8, 2).c_str());
-	int numdate = year * 10000 + month * 100 + day;
-	return (numdate);
+
+	while (date.find("-") != std::string::npos)
+	{
+		date.erase(date.find("-"), 1);
+	}
+	return (atoi(date.c_str()));
 }
 
 void BitcoinExchange::SetDatabase()
 {
-	std::ifstream Exchangefile;
+	std::ifstream datafile;
 	std::string line;
 	float pricefloat = 0.0;
 
-	Exchangefile.open("./data.csv");
-	if (!Exchangefile.is_open())
-		throw std::runtime_error("Error: file not found");
-	std::getline(Exchangefile, line);
-	while (std::getline(Exchangefile, line))
+	datafile.open("./data.csv");
+	if (!datafile.is_open())
+		throw DBNotFound();
+	std::getline(datafile, line);
+	while (std::getline(datafile, line))
 	{
 		std::string date = line.substr(0, line.find(','));
 		int numdate = toNumDate(date);
@@ -48,7 +49,7 @@ void BitcoinExchange::SetDatabase()
 		tofloat >> pricefloat;
 		_database[numdate] = pricefloat;
 	}
-	Exchangefile.close();
+	datafile.close();
 }
 
 void BitcoinExchange::ReadDatabase(std::string path)
@@ -56,69 +57,77 @@ void BitcoinExchange::ReadDatabase(std::string path)
 	std::ifstream Inputfile;
 	std::string line;
 
-	std::cout << "Reading database: " << path << std::endl;
 	Inputfile.open(path.c_str());
 	if (!Inputfile.is_open())
-		throw std::runtime_error("Error: file not found");
+		throw IFNotFound();
+	std::cout << reset << "Reading input from: " << path << reset << std::endl;
 	std::getline(Inputfile, line);
 	while (std::getline(Inputfile, line))
 	{
-		std::string date = line.substr(0, line.find('|'));
-		int year = atoi(date.substr(0, 4).c_str());
-		int month = atoi(date.substr(5, 2).c_str());
-		int day = atoi(date.substr(8, 2).c_str());
+		std::string date = line.substr(0, line.find('|') - 1);
 
-		std::string number = line.substr(line.find('|') + 1, line.length());
-		
-		float bitcoin = 0.0;
-		std::stringstream tofloat;
-		tofloat << number;
-		tofloat >> bitcoin;
-
-		if (InputChecker(year, month, day, bitcoin, line) == 0)
-		{
-			int numdate = toNumDate(date);
-			PrintRate(numdate, date, bitcoin);
-		}
-		
+		InputChecker(line);
 	}
 	Inputfile.close();
 }
 
-int BitcoinExchange::InputChecker(int year, int month, int day,  float bitcoin, std::string line)
+int BitcoinExchange::InputChecker(std::string line)
 {
 	size_t pos = line.find('|');
 	if (pos == std::string::npos || line[pos - 1] != ' ' || line[pos + 1] != ' ')
 	{
-		std::cout << "Error: bad input => " << line << std::endl;
+		std::cout << red << "Error: " << white << "bad input => " << reset << line << std::endl;
+		return (1);
+	}
+	std::string date = line.substr(0, line.find('|') - 1);
+
+	int dash = 0;
+
+	for (size_t i = 0; i < date.length(); i++)
+	{
+		if (date[i] == '-')
+			dash++;
+	}
+
+	if (dash != 2)
+	{
+		std::cout << red << "Error: " << white << "bad input => " << reset << line << std::endl;
 		return (1);
 	}
 
-	if (year < 2009)
-	{
-		std::cout << "Error: bad input => " << line << std::endl;
-		return (1);
-	}
+	std::string strmonth = date.substr(date.find_first_of("-") + 1, date.find_last_of("-") - date.find_first_of("-") - 1);
+	int month = atoi(strmonth.c_str());
 	if (month < 1 || month > 12)
 	{
-		std::cout << "Error: bad input => " << line << std::endl;
+		std::cout << red << "Error: " << white << "not a valid month => " << reset << line << std::endl;
 		return (1);
 	}
+	std::string strday = date.substr(date.find_last_of("-") + 1);
+	int day = atoi(strday.c_str());
 	if (day < 1 || day > 31)
 	{
-		std::cout << "Error: bad input => " << line << std::endl;
+		std::cout << red << "Error: " << white << "not a valid day => " << reset << line << std::endl;
 		return (1);
 	}
+	std::string number = line.substr(line.find('|') + 1, line.length());
+		
+	float bitcoin = 0.0;
+	std::stringstream tofloat;
+	tofloat << number;
+	tofloat >> bitcoin;
+
 	if (bitcoin < 0.0)
 	{
-		std::cout << "Error: not a positive number " << line << std::endl;
+		std::cout << red << "Error: " << white << "value to low => " << reset << line << std::endl;
 		return (1);
 	}
 	if (bitcoin > 1000.0)
 	{
-		std::cout << "Error: too large a number " << line << std::endl;
+		std::cout << red << "Error: " << white << "value too high => " << reset << line << std::endl;
 		return (1);
 	}
+	int numdate = toNumDate(date);
+	PrintRate(numdate, date, bitcoin);
 	return (0);
 }
 
@@ -134,7 +143,11 @@ void BitcoinExchange::PrintRate(int numdate, std::string date, float bitcoin)
 		}
 	}
 	it = _database.lower_bound(numdate);
-	if (it != _database.begin())
-		it--;
+	if (it == _database.begin())
+		{
+			std::cout << red << "Error: " << white << "date too early => " << reset << date << std::endl;
+			return ;
+		}
+	it++;
 	std::cout << date << " => " << bitcoin << " = " << it->second * bitcoin << std::endl;
 }

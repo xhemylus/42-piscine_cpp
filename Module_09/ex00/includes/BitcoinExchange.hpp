@@ -6,6 +6,11 @@
 #include <sstream>
 #include <stdlib.h>
 
+#define red "\033[1;31m"
+#define orange "\033[1;33m"
+#define white "\033[0;37m"
+#define reset "\033[0;0m"
+
 class BitcoinExchange
 {
 private:
@@ -19,6 +24,33 @@ public:
 	void SetDatabase();
 	void ReadDatabase(std::string path);
 
-	int InputChecker(int year, int month, int day, float bitcoin, std::string line);
-	void PrintRate(int date, std::string numdate, float bitcoin);
+	int InputChecker(std::string line);
+	void PrintRate(int numdate, std::string date, float bitcoin);
+};
+
+class DBNotFound : public std::exception
+{
+public:
+	virtual const char *what() const throw()
+	{
+		return (red "Error: " white "Database not found." reset);
+	}
+};
+
+class IFNotFound : public std::exception
+{
+public:
+	virtual const char *what() const throw()
+	{
+		return (red "Error: " white "Input file not found." reset);
+	}
+};
+
+class BadUsage : public std::exception
+{
+public:
+	virtual const char *what() const throw()
+	{
+		return (orange "Usage: " white "./btc <inputfile>" reset);
+	}
 };

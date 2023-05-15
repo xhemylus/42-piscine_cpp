@@ -2,6 +2,7 @@
 
 PMergeMe::PMergeMe()
 {
+	odd = false;
 }
 
 PMergeMe::~PMergeMe()
@@ -27,33 +28,43 @@ PMergeMe &PMergeMe::operator=(PMergeMe const &src)
 
 void PMergeMe::isUnsigned(char *str1, char *str2)
 {
-	if (isdigit(*str1) == 0 || isdigit(*str2) == 0)
-		throw std::runtime_error("Invalid arguments");
-	if (std::atoi(str1) < 0 || std::atoi(str2) < 0)
-		throw std::invalid_argument("Invalid arguments");
+	std::string string1(str1);
+	std::string string2(str2);
+	if (string1.find_first_not_of("0123456789") != std::string::npos || string2.find_first_not_of("0123456789") != std::string::npos)
+		throw InvalidInput();
 }
 
 void PMergeMe::holder(int argc, char **argv)
 {
+	std::cout << "Before: ";
+	// if (argc < 6)
+	// {
+	// 	for (int i = 1; i < argc; i++)
+	// 		std::cout << argv[i] << " ";
+	// 	std::cout << std::endl;
+	// }
+	// else 
+	// {
+	// 	for (int i = 1; i < 6; i++)
+	// 		std::cout << argv[i] << " ";
+	// 	std::cout << "[...]" << std::endl;
+	// }
+
+	for (int i = 1; i < argc; i++)
+	{
+		std::cout << argv[i] << " ";
+	}
+	std::cout << std::endl;
+
 	if ((argc - 1) % 2 != 0)
 	{
 		odd = true;
-		if(std::atoi(argv[argc - 1]) < 0)
-			throw std::invalid_argument("Invalid arguments");
+		std::string string1(argv[argc - 1]);
+		if (string1.find_first_not_of("0123456789") != std::string::npos)
+			throw InvalidInput();
 		tmp = std::atoi(argv[argc - 1]);
+
 		argc--;
-	}
-	std::cout << "Before: ";
-	if (argc < 6)
-	{
-		for (int i = 1; i < argc; i++)
-			std::cout << argv[i] << " " << std::endl;
-	}
-	else 
-	{
-		for (int i = 1; i < 6; i++)
-			std::cout << argv[i] << " ";
-		std::cout << "[...]" << std::endl;
 	}
 
 	for (int i = 1; i < argc; i+=2)

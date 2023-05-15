@@ -4,14 +4,11 @@ bool odd = false;
 
 int main (int argc, char **argv)
 {
-	if (argc < 2)
-	{
-		std::cerr << "No arguments" << std::endl;
-		return 1;
-	}
 	PMergeMe pmm;
 	try
 	{
+		if (argc < 2)
+			throw BadUsage();
 		pmm.holder(argc, argv);
 	}
 	catch(const std::exception& e)
